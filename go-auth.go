@@ -17,6 +17,7 @@ import (
 
 	goredis "github.com/go-redis/redis"
 	bes "github.com/iegomez/mosquitto-go-auth/backends"
+	freecache "github.com/coocood/freecache"
 )
 
 type Backend interface {
