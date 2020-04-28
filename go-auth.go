@@ -532,12 +532,6 @@ func AuthAclCheck(clientid, username, topic string, acc int) bool {
 
 				var backend = commonData.Backends[bename]
 
-				log.Debugf("Superuser check with backend %s", backend.GetName())
-				if backend.GetSuperuser(username) {
-					log.Debugf("superuser %s acl authenticated with backend %s", username, backend.GetName())
-					aclCheck = true
-				}
-
 				//If not superuser, check acl.
 				if !aclCheck {
 					log.Debugf("Acl check with backend %s", backend.GetName())
@@ -681,22 +675,6 @@ func CheckBackendsAcl(username, topic, clientid string, acc int) bool {
 	//Check superusers first
 
 	aclCheck := false
-
-	for _, bename := range backends {
-
-		if bename == "plugin" {
-			continue
-		}
-
-		var backend = commonData.Backends[bename]
-
-		log.Debugf("Superuser check with backend %s", backend.GetName())
-		if backend.GetSuperuser(username) {
-			log.Debugf("superuser %s acl authenticated with backend %s", username, backend.GetName())
-			aclCheck = true
-			break
-		}
-	}
 
 	if !aclCheck {
 		for _, bename := range backends {
